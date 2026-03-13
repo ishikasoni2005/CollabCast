@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0f172a;
+  background-color: #f8fafc;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.landing-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+  background-position: center;
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 42%, transparent 100%);
+}
+
+.landing-orb {
+  position: absolute;
+  height: 16rem;
+  width: 16rem;
+  border-radius: 9999px;
+  filter: blur(38px);
+  opacity: 0.65;
+}
+
+.landing-orb-sky {
+  background: rgba(56, 189, 248, 0.42);
+}
+
+.landing-orb-amber {
+  background: rgba(251, 191, 36, 0.35);
+}
+
+.landing-orb-slate {
+  background: rgba(59, 130, 246, 0.16);
+  height: 9rem;
+  width: 9rem;
+}
+
+.landing-card {
+  animation: landing-rise 650ms ease-out both;
+}
+
+.landing-reveal {
+  animation: landing-rise 700ms ease-out both;
+}
+
+.landing-float-slow {
+  animation: landing-float-slow 16s ease-in-out infinite;
+}
+
+.landing-float-fast {
+  animation: landing-float-fast 10s ease-in-out infinite;
+}
+
+@keyframes landing-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes landing-float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(18px, 20px, 0);
+  }
+}
+
+@keyframes landing-float-fast {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-16px, -18px, 0);
+  }
+}
