@@ -1,5 +1,4 @@
 # CollabCast
-
 A real-time collaborative presentation platform built with React, Django, and WebRTC.
 
 ## Features
