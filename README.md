@@ -23,7 +23,7 @@ A real-time collaborative presentation platform built with React, Django, and We
 ### Backend
 - Django with Django REST Framework
 - Django Channels for WebSockets
-- PostgreSQL database
+- MongoDB database
 - Redis for WebSocket message broker
 - JWT authentication
 
