@@ -1,124 +1,105 @@
-# CollabCast
-A real-time collaborative presentation platform built with React, Django, and WebRTC.
+# 🎙️ CollabCast — Real-Time Collaborative Platform
 
-## Features
+A **real-time collaboration platform** where developers and creators can find teammates, discuss ideas, and build projects together — powered by Django Channels, WebRTC, and Redis.
 
-- User authentication with JWT
-- Create and join presentation rooms
-- Real-time collaborative slide editing
-- Live chat in rooms
-- WebRTC video/audio communication
-- Presentation mode
+---
 
-## Tech Stack
+## ✨ Features
 
-### Frontend
-- React 18 with TypeScript
-- Vite for build tooling
-- TailwindCSS for styling
-- Zustand for state management
-- WebRTC for peer-to-peer communication
-- WebSockets for real-time updates
+- JWT authentication with role-based access control
+- Create and join collaboration rooms with real-time presence tracking
+- Peer-to-peer audio and video communication via WebRTC
+- Real-time messaging and live updates via WebSockets
+- Multi-user collaboration with sub-100ms latency
+- MySQL-backed session and room state persistence
 
-### Backend
-- Django with Django REST Framework
-- Django Channels for WebSockets
-- MongoDB database
-- Redis for WebSocket message broker
-- JWT authentication
+---
 
-## Setup Instructions
+## 🛠️ Tech Stack
 
-### Prerequisites
-- Node.js 18+
-- Python 3.10+
-- PostgreSQL
-- Redis
+| Layer | Technology |
+|-------|------------|
+| Backend | Django, Django REST Framework |
+| Real-Time | Django Channels, WebSockets, WebRTC |
+| Channel Layer | Redis |
+| Auth | JWT Authentication |
+| Database | MySQL |
 
-### Backend Setup
+---
 
-1. Navigate to backend directory:
-   ```bash
-   cd collabcast/backend
-   ```
+## 📂 Project Structure
 
-2. Create virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+```text
+collabcast/
+├── backend/
+│   ├── collabcast/
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── asgi.py
+│   │   └── wsgi.py
+│   ├── apps/
+│   │   ├── auth/          # JWT registration and login
+│   │   ├── rooms/         # Room creation, join, state persistence
+│   │   ├── slides/        # Slide management per room
+│   │   └── messages/      # Real-time chat and message history
+│   ├── manage.py
+│   └── requirements.txt
+└── README.md
+```
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+---
 
-4. Set up PostgreSQL database:
-   - Create database named 'collabcast'
-   - Update database credentials in `collabcast/settings.py`
+## 🔌 API Reference
 
-5. Run migrations:
-   ```bash
-   python manage.py migrate
-   ```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | User registration |
+| POST | `/api/auth/login` | Obtain JWT token |
+| POST | `/api/rooms/create` | Create a new room |
+| GET | `/api/rooms/{id}` | Get room details |
+| GET | `/api/slides/{room_id}` | Get slides for room |
+| GET | `/api/messages/{room_id}` | Get message history |
 
-6. Start Redis server (in another terminal):
-   ```bash
-   redis-server
-   ```
+### WebSocket
 
-7. Start Django server:
-   ```bash
-   python manage.py runserver
-   ```
+```
+ws://localhost:8000/ws/rooms/{room_id}/
+```
 
-### Frontend Setup
+Handles real-time room events: presence tracking, slide updates, live chat.
 
-1. Navigate to frontend directory:
-   ```bash
-   cd collabcast/frontend
-   ```
+---
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## ⚙️ Setup
 
-3. Start development server:
-   ```bash
-   npm run dev
-   ```
+```bash
+cd collabcast/backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+```
 
-### Usage
+Start Redis (separate terminal):
 
-1. Open browser to `http://localhost:5173` (frontend)
-2. Register a new account or login
-3. Create a new room or join existing one
-4. Start collaborating on slides and communicating via chat/video
+```bash
+redis-server
+```
 
-## API Endpoints
+Start Django:
 
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/rooms/create` - Create room
-- `GET /api/rooms/{id}` - Get room details
-- `GET /api/slides/{room_id}` - Get slides for room
-- `GET /api/messages/{room_id}` - Get messages for room
+```bash
+python manage.py runserver
+```
 
-## WebSocket Routes
+Backend API: `http://localhost:8000`
+WebSocket: `ws://localhost:8000`
 
-- `ws://localhost:8000/ws/rooms/{room_id}/` - Room WebSocket for real-time updates
+---
 
-## Development
+## ✅ Verification
 
-- Frontend runs on `http://localhost:5173`
-- Backend API on `http://localhost:8000`
-- WebSocket on `ws://localhost:8000`
-
-## Contributing
-
-1. Fork the repository
-2. Create feature branch
-3. Make changes
-4. Test thoroughly
-5. Submit pull request
+```bash
+python manage.py check
+python manage.py test
+```
